@@ -3,7 +3,8 @@ Key features
 
 Some of the key features / highlights of FOF:
 
-**Convention over configuration, Rails style**. Instead of having to
+###Convention over configuration, Rails style. 
+Instead of having to
 painstakingly code every single bit of your component, it's sufficient
 to use our naming conventions, inspired by Ruby on Rails conventions.
 For example, if you have com\_example, the foobar view will read from
@@ -12,8 +13,8 @@ example\_foobar\_id. The default implementation of controllers, models,
 tables and views will also cater for the majority of use cases,
 minimising the code you'll need to write.
 
-**HMVC today, without relearning component development**. There's a lot
-of talk about the need to re-engineer the MVC classes in Joomla! to
+###HMVC today, without relearning component development.
+There's a lot of talk about the need to re-engineer the MVC classes in Joomla! to
 support HMVC. What if we could give you HMVC support using the existing
 MVC classes, today, without having to relearn how to write components?
 Yes, it's possible with FOF. It has been possible since September 2011,
@@ -21,8 +22,8 @@ actually. And for those who mumble their words and spread FUD, yes, it
 IS HMVC by any definition. The very existence of the FOFDispatcher class
 proves the point.
 
-**Easy reuse of view template files without ugly include()**. More often
-than not you want to reuse view template files across views. The
+###Easy reuse of view template files without ugly include(). 
+More often than not you want to reuse view template files across views. The
 "traditional" way was by using include() or require() statements. This
 meant, however, that template overrides ceased working. Not any more!
 Using FOFView's loadAnyTemplate() you can load any view template file
