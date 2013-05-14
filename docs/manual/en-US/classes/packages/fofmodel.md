@@ -1,9 +1,9 @@
 ### FOFModel
 
-**What FOFModel does**
+####What FOFModel does
 
-**Convention over Configuration**
+####Convention over Configuration
 
-**Specialising FOFModel**
+####Specialising FOFModel
 
-**FOFModel methods you should know about**
+####FOFModel methods you should know about
