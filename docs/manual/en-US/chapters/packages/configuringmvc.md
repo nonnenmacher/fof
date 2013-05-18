@@ -53,6 +53,19 @@ parts of your FOF component.
 
     <?xml version="1.0" encoding="UTF-8"?>
     <fof>
+        <!-- Common settings -->
+        <common>
+        	<!-- Table options common to all tables -->
+        	<table name="*">
+        		<field name="locked_by">checked_out</field>
+        		<field name="locked_on">checked_out_time</field>
+        	</table>
+        	<!-- Table options for a specific table -->
+        	<table name="items">
+        		<field name="enabled">published</field>
+        	</table>
+        </common>    
+    
         <!-- Component back-end options -->
         <backend>
             <!-- Dispatcher options -->
@@ -60,7 +73,7 @@ parts of your FOF component.
                 <option name="default_view">items</option>
             </dispatcher>
         </backend>
-        
+                
         <!-- Component front-end options -->
         <frontend>
             <!-- Dispatcher options -->
@@ -92,10 +105,10 @@ parts of your FOF component.
 
 The `fof.xml` file has an `<fof>` root element. Inside it you can have
 zero or one tags called `<frontend>`, `<backend>` and `<cli>` which
-configure FOF for front-end, back-end and CLI access respectively.
-Please note that the CLI is a special case: it will mix both the
+configure FOF for front-end, back-end and CLI access respectively. You may also have a tag named `<common>` which defines settings applicable for any mode of access. These common settings will be overridden by the corresponding settings defined in the `<frontend>`, `<backend>` and `<cli>`.
+Please note that the CLI is yet another special case: it will mix the common,
 back-end and CLI settings to derive the final configuration. In the
-other two cases (front- or back-end access) only the configuration for
+other two cases (front- or back-end access) only the common and the configuration for
 this specific mode of access will be used.
 
 ### Dispatcher settings
@@ -111,6 +124,27 @@ default\_view
 :   Defines the default view to show if none is defined in the input
     data. By default this is `cpanel`. In the example above we set it to
     items in the back-end and item in the front-end.
+
+### Table settings
+
+The table settings allow you to set up table options, in case you do not wish to use the default conventions of FOF. You define the table the options apply to using the `name` attribute of the view tag. Please note that this is the name used in the class, not in the database. So, if you have a database table named `#__example_items` and your class is named `ExampleTableItem` you must use `name="item"` in the `fof.xml` file.
+
+The settings of each table are isolated from the settings of every other
+table, with one notable exception: the star table, i.e. `name="*"`. This
+is a placeholder table that defines the default settings. These settings
+are applied to all tables. If you also have a table tag for a view, the
+default settings (from the star table) and the settings for the
+particular table  are merged together. This applies to all settings
+described below.
+
+#### Field map settings
+
+The field map settings allow you to map specific magic field names to your table's fields, in case you do not use FOF's contentions. It works the same way as adding setting the `_columnAlias` array in your
+specialized Table class.
+
+The field map is enclosed inside the `<table>` tag itself. It consists of one or more `<field>` tags. The
+`name` attribute defines the name of the magic (FOF convention) field to map, whereas the
+content of the tag defines the name of the field in your database table.
 
 ### View settings
 
