@@ -36,6 +36,8 @@ From that point onwards you can use FOF in your extension.
 
 ### Installing FOF with your component
 
+> Joomla! 3.2 will ship with FOF pre-installed. Developers must make sure that they do *not* accidentally overwrite the FOF library shipped with Joomla!. You can do that with an `if(version_compare(JVERSION, '3.2.0', 'ge')) return;` in your FOF installation code.
+
 Unfortunately, Joomla! doesn't allow us to version checking before
 installing a library package. This means that it's your responsibility
 to check that there is no newer version of FOF installed in the user's
