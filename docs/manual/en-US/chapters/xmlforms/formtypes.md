@@ -1,21 +1,3 @@
-XML Forms
-=========
-Traditionally, creating view templates involves a .php file where PHP and HTML code are intermixed to create the appropriate representation of the data to be served to a web browser. While this gives maximum flexibility to the developer it is also a drag, requiring you to write a lot of repetitive code.
-
-Joomla! 1.6 and later is providing a solution to this problem, at least for edit views: JForm. With it it's possible to create an XML file which defines the controls of the form and have JForm render it as HTML.
-
-Pros:
-
--	The view templates are easier to read
--	The HTML generation is abstracted, making it easier to upgrade to newer versions of Joomla! using a different HTML structure
-
-Cons:
-
-- You need to change your Controllers, Models and Views to cater for and display the forms
-- They only apply to edit views
-
-FOF takes this concept further with the FOFForm package. Not only can you create edit views, but you can also create browse (records listing) and read (single record display) views out of XML forms. Moreover, the forms are handled automatically by the FOF base MVC classes without requiring you to write any additional code. If you want you can always combine a traditional .php view template with a form file for maximum customisation of your view.
-
 The different form types
 ------------------------
 
@@ -271,139 +253,36 @@ Please note that media file overrides rules are in effect for these Javascript f
 
 ### Formatting your forms
 
+OK, granted, the automatically rendered forms are a timesaver but, by default, they look terrible. This is quite expected. It's like comparing a rug churned out by a mechanised production line (the automatically rendered form) and a hand-stiched persian rug (the hand-coded PHP-based view template). The good news is that, unlike rugs, there's some room of improvement with XML forms.
+
+For starters, the `<fieldset>`s of Edit and Read forms, as well as the fields themselves, can be assigned CSS classes and IDs which can help you provide a custom style. Moreover, you can mix XML forms and PHP-based view templates to further customise the display of your forms. 
+
+In this section we will cover both customisation methods. If this doesn't sound enough for your project you can always use hand-coded PHP-based view templates, much like how you did since Joomla! 1.5.0. It's up to you to decide which method is best for your project!
+
 #### Assigning classes and IDs to `<fieldset>`s
 
-@TODO fieldset options for formatting
+Each fieldset of a Read and Edit form can have the following optional attributes:
+
+**class**:
+One or more CSS classes to be applied to the generated `<div>` element.
+
+**name**:
+The value of this attribute is applied to the `id` attribute of the generated `<div>` element.
+
+**label**:
+The value of this attribute is rendered as a level 3 heading (`<h3>`) element at the top of the generated `<div>` element.
+
+If you are using the optional Akeeba Strapper package (which back ports Bootstrap to Joomla! 2.5) or Joomla! 3 you can use Bootstrap's classes to create visually interesting interfaces. For example, using `class="span6 pull-left"` will create a half-page-wide left floating sidebar out of your field set.
 
 #### Mixing XML forms with PHP-based view templates
 
-@TODO mixing forms and PHP
+Inside your .php view template file you can use `$this->getRenderedForm()` to return the XML form file rendered as HTML. This allows you to customise the layout (e.g. adding information before/after the form) while still using the XML file to render the actual form.
 
+To use this approach, simply insert this code in your custom .php template file:
 
-Header field types reference
-----------------------------
-
-### accesslevel
-
-### field
-
-### fieldsearchable
-
-### fieldselectable
-
-### fieldsql
-
-### filtersearchable
-
-### filterselectable
-
-### filtersql
-
-### language
-
-### ordering
-
-### published
-
-### rowselect
-
-Form field types reference
---------------------------
-
-### accesslevel
-
-### button
-
-### cachehandler
-
-### calendar
-
-### captcha
-
-### checkbox
-
-### editor
-
-### email
-
-### groupedlist
-
-### hidden
-
-### image
-
-### imagelist
-
-### integer
-
-### language
-
-### list
-
-### media
-
-### model
-
-### ordering
-
-### password
-
-### plugins
-
-### published
-
-### radio
-
-### rules
-
-### selectrow
-
-### sessionhandler
-
-### spacer
-
-### sql
-
-### tel
-
-### text
-
-### textarea
-
-### timezone
-
-### url
-
-### user
-
-Media files identifiers
------------------------
-
-FOF expects you to give an abstracted path to your media (CSS, Javascript, image, …) files, also called an "identifier". These identifiers are in the form:
-
-	area://path
-	
-Where the `area` can be one of:
-
-**media**
-: The file is searched inside your site's `media` directory. FOF will also try to locate it in the media overrides directory of your site, e.g. `templates/your_template/media` where your_template is the name of the currently active template on your site.
-
-In this case the `path` is the rest of the path relative to the media or media override directory. The first part of your path SHOULD be your extension's name, e.g. com_example.
-
-Example: `media://com_example/css/style.css` will look for the file `templates/your_template/media/com_example/css/style.css` or, if it doesn't exist, `media/com_example/css/style.css`
-
-**admin**
-: The file is searched for in the administration section of your extension. The first part of the path MUST be your extension's name. The file is first searched for in your template override directory.
-
-Example: `admin://com_example/assets/style.css` will look for the file `administrator/templates/your_template/com_example/assets/style.css` or, if it doesn't exist, `administrator/components/com_example/assets/style.css`
-
-**site**
-: The file is searched for in the front-end section of your extension. The first part of the path MUST be your extension's name. The file is first searched for in your template override directory.
-
-Example: `site://com_example/assets/style.css` will look for the file `templates/your_template/com_example/assets/style.css` or, if it doesn't exist, `components/com_example/assets/style.css`
-
-> **IMPORTANT**
-> 
-> FOF cannot know what is the other side's template. Let's put it simply. If you are in the front-end, your template is called "foobar123" and you use the identifier  `admin://com_example/assets/style.css`, FOF will look for the template override in `administrator/templates/foobar123/com_example/assets/style.css`. Of course this is incorrect, but there is no viable way to know what the back-end template in use is from the site's front-end and vice versa. As a result, we strongly recommend only using `media://` identifiers for media files.
-> 
-> On top of that there is a security aspect as well. The front-end of your component should never try to load media files from the back-end of the component. Many web masters choose to conceal the fact that they are using Joomla! by means of password protection or redirection of the `administrator` directory.
+```
+<?php
+$viewTemplate = $this->getRenderedForm();
+echo $viewTemplate; 
+?>
+```
