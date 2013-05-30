@@ -1,42 +1,3 @@
-XML Forms
-=========
-
-The different form types
-------------------------
-
-### Browse forms
-
-### Read forms
-
-### Edit forms
-
-Header field types reference
-----------------------------
-
-### accesslevel
-
-### field
-
-### fieldsearchable
-
-### fieldselectable
-
-### fieldsql
-
-### filtersearchable
-
-### filterselectable
-
-### filtersql
-
-### language
-
-### ordering
-
-### published
-
-### rowselect
-
 Form field types reference
 --------------------------
 
@@ -83,6 +44,8 @@ Form field types reference
 ### published
 
 ### radio
+
+### rules
 
 ### selectrow
 
