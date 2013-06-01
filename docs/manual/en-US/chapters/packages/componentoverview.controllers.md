@@ -12,7 +12,7 @@ The controller file name MUST match the last part of the class name. This means 
 All Controller files are located in your component's `controllers` directories, in the front-end and back-end. If a file is not present in the front-end, it will be attempted to be loaded from the back-end and vice versa. If the Controller class is not loaded and a suitable file cannot be found FOF will fall back to one of the following, in this order:
 
 1. The Default controller. This is a special controller class following the naming conventions `ComponentControllerDefault`, e.g. `TodoControllerDefault`, found in the `default.php` file inside your controllers directory.
-2. If a default controller is not found, FOF will fall back to creating a suitably configured instance of FOFController, using convention over configuration to determine what the model object should do.
+2. If a default controller is not found, FOF will fall back to creating a suitably configured instance of FOFController, using convention over configuration to determine what the controller object should do.
 
 ## View names and handling by a single controller
 
