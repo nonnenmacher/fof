@@ -31,6 +31,7 @@ Magic fields have special meaning for FOF. They are:
 - **locked_on** The date when the record was locked (checked out) for editing. Handled automatically by FOF.
 - **hits** How many read hits this record has received. Handled automatically by FOF.
 - **asset_id** The ID in the `#__assets` table for the record. Handled automatically by FOF. Only required if you want per item ACL privileges.
+- **access** Viewing access level
 
 You can always customise the magic fields' names in your Table class using the _columnAlias array property. For example, if your column is named published instead of enabled:
 
