@@ -1,4 +1,4 @@
-h1. How-to, tips and tricks
+# How-to, tips and tricks
 
 This section of the documentation contains random suggestions for completing specific tasks. 
 
