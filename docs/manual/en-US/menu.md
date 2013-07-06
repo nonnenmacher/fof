@@ -9,7 +9,7 @@
 	- [Views](chapters/packages/componentoverview.views.md)
 	- [Dispatcher](chapters/packages/componentoverview.dispatcher.md)
 	- [Toolbar](chapters/packages/componentoverview.toolbar.md)
-	- [HMVC](chapters/packages/componentoverview.hmvc.md)
+	- [HMVC](chapters/packages/componentoverview.HMVC.md)
 
 - Features Reference
 - [Configuring MVC](chapters/config/overview.md)
