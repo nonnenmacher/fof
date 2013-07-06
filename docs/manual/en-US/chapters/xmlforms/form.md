@@ -6,9 +6,21 @@ Form field types reference
 For all following fields you can set the following attributes:
 
 * **name** The name of the field. This has to match the table field name in the model.
+	
+	If you want to create a header for a calculated field or for a column that doesn't correspond to a table field please use a name that doesn't overlap with the name of a column in the table. If you want to list a field many times (e.g. display a row selection checkbox and the record ID at the same time) you will have to use the same `name` in both fields, but use a different `id` attribute.
 * **type** The field type. See below for the available field types, as well as the options which can be specified in each one of them.
-* **label** The language string which will be used for the label of the field; this is a language string that will be fed to JText::_() for translation
+* **label** The language string which will be used for the label of the field; this is a language string that will be fed to JText::_() for translation.
+* **id** The `id` attribute for this field. Skip it to have FOF create one based on the field name.
+
+	If none is provided FOF will automatically create one using the convention component_modelname_fieldname_LABEL where component is the name of your component, modelname is the name of your model (usually equals to the view name) and fieldname is the name of the field. For example, for a component com_foobar, a view named items and a field named baz we get the language string COM_FOOBAR_ITEMS_BAZ_LABEL.
+* **emptylabel** Set this to 1 if you intend to have a field without a label
+* **description** The language string which will be used for the label of the field; this is a language string that will be fed to JText::_() for translation.
 * **required** Set it to 1, yes or true to make this a required field. If you use the form validation then the form cannot be submitted unless this value is filled in.
+
+
+> **IMPORTANT**
+>
+> The automatic label and description only apply if you are using Akeeba Strapper or if you are using Joomla! 3.0 and later. If you are using FOF on plain old Joomla! 2.5 you must provide the `label` and `description` attributes manually.
 
 # Field types
 
@@ -176,6 +188,8 @@ You can set the following attributes:
 
 This will display a select input of generic options.
 
+**IMPORTANT** The following attributes apply to all field types that present a drop-down list; they all descend from this field type.
+
 You can set the following attributes:
 
 * **class** CSS class (default '')
@@ -187,6 +201,17 @@ You can set the following attributes:
 * **show_link** if true, adds a link around each item based on the "url" attribute (default false)
 
 This element has `<option>` sub-elements defining the available options. Please consult Joomla!'s own element of the same type for more information.
+
+Since FOF 2.1.0 we allow you to use a programmatically generated data source instead of the hard-coded `<option>` tags. This can be used when you need your code to generate options based on some configuration data, data from the database and so on. You do that by supplying the name of a PHP class and a static method on that class which returns the data. The data must be returned in an indexed array where the key is the key of the drop-down list item and the value is the description (translation key or string). You may also use a simple array containing indexed arrays by using the `source_key` and `source_value` attributes.
+
+The relevant attributes are:
+
+* **source_file** (optional) The PHP file which provides the class and method. It is given in the pseudo-URL format e.g. `admin://components/com_foobar/helpers/mydata.php` or `site://components/com_foobar/helpers/mydata.php` for a file relative to the administrator or site root directory respectively.
+* **source_class** (required) The name of the PHP class to use, e.g. `FoobarHelperMydata`
+* **source_method** (required) The static method of the PHP class to use, e.g. `getSomeFoobarData`
+* **source_key** (optional) If you are using an array of indexed arrays, this is the key of the indexed array that contains the key of the drop-down option.
+* **source_key** (optional) If you are using an array of indexed arrays, this is the key of the indexed array that contains the value (description) of the drop-down option.
+* **source_translate** (optional) By default all values are being translated, i.e. fed through JText::_(). If you don't want that, set this attribute to "false".
 
 ### media
 
@@ -222,7 +247,11 @@ You can set the following attributes on top of those of the 'list' field type's:
 * **key_field** The name of the field in the model's results which is used as the key value of the drop-down
 * **value_field** The name of the field in the model's results which is used as the label of the drop-down
 * **translate** Should the value field's value be passed through JText::_() before being displayed?
-* **apply_access** Should we respect the view access level, if an access field is present in the model>
+* **apply_access** Should we respect the view access level, if an access field is present in the model
+* **none** The placeholder to be shown if the value is not found in the data returned by the model. This placeholder goes through JText, so you can use a language string if you like.
+* **format** See the text field type
+* **show_link** See the text field type
+* **url** See the text field type
 
 In order to filter the model you can specify `<state>` sub-elements in the format:
 
@@ -231,7 +260,7 @@ In order to filter the model you can specify `<state>` sub-elements in the forma
 Where state_key is the key of a state variable and value is its value. For instance, you could have something like:
 
 	<state key="foobar_category_id">123</state>
-
+	
 ### ordering
 
 This will display an ordering field for your list, both in traditional Joomla! method and with a new ajax drag'n'drop method. We recommend placing this field first on your form, to respect Joomla! 3.0 and later's JUI (Joomla! User Interface) guidelines.
@@ -321,6 +350,9 @@ You can set the following attributes:
 * **value_field** the table field to display as text
 * **query** the actual SQL query to run
 
+We recommend avoiding this field type as the query is specific to a particular database server technology. Using the `model` or `list` type with a programmatic data source is strongly encouraged.
+
+
 ### tel
 
 This will display a text input which expects a valid telephone value.
@@ -340,13 +372,22 @@ This will display a single line text input.
 You can set the following attributes:
 
 * **class** CSS class (default '')
-* **url** URL template for each element (use [ITEM:ID] as a placeholder for the item id) 
+* **url** URL template for each element (use [ITEM:ID] as a placeholder for the item id). This goes through the field tag replacement (see below)
 * **show_link** if true, a "tel:" link will be appended around the field value (default false)
 * **empty_replacement** a string to show in place of the field when it's empty
 * **size** The size of the input in characters
 * **maxlength** The maximum acceptable input length in characters
 * **readonly** Is this a read-only field?
 * **disabled** Is this a disabled form field element?
+* **format_string** A string or translation key used to format the text data before it is displayed. Uses the format() PHP function's syntax.
+* **format_if_not_empty** Should we apply the format string even when the field is empty? Default: true
+* **parse_value** If set to true, the value of the field will go through the field tag replacement (see below) Default: false
+
+#### Field tag replacement for text fields
+
+You can reference values from other fields inside your text. You can do that using the square bracket tag syntax, i.e. `[ITEM:fieldname]` is replaced with the value of the field `fieldname`. The tag must open with a square bracket, followed by the uppercase word ITEM, followed by a colon, the field name and closing with a square bracket. You must not use spaces in the tag.
+
+FOF also recognises the special tag `[ITEM:ID]`, replacing it with the value of the key field of the table.
 
 ### textarea
 
@@ -359,6 +400,16 @@ You can set the following attributes:
 * **cols** Number of columns
 * **rows** Number of rows
 * **onchange** The onChange Javascript event
+
+### title
+
+This is like a text field. On list views it will display a second line containing secondary information, e.g. the alias (slug) of the record.
+
+The following attributes are used on top of the text field's attributes:
+
+* **slug_field** The name of the field containing the slug or other secondary information to display. Default: slug
+* **slug_format** The format string (string or translation key) for the secondary information line. Default: (%s)
+* **slug_class** The CSS class of the secondary information line. Default: small
 
 ### timezone
 
