@@ -14,9 +14,9 @@ productive from the first day you're using it. Our goal is to always
 support the officially supported LTS versions of Joomla! and not break
 backwards compatibility without a clear deprecation and migration path.
 
-FOF is currently used by Akeeba products such as Akeeba Backup, Admin
-Tools, Akeeba Subscriptions, Akeeba Ticket System and Akeeba DocImport
-components.
+FOF is compatible with the database technologies used by Joomla! itself: MySQL, SQL Server (and Windows Azure SQL), PostgreSQL. In most cases you can write a component in one database server technology and have it run on the other database server technologies with minimal or no effort.
+
+FOF is currently used by free and commercial components for Joomla! by an increasing number of developers.
 
 Free Software means collaboration
 ---------------------------------

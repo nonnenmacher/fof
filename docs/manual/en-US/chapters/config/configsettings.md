@@ -18,9 +18,9 @@ file’s `<option>` tags inside the `<view>` tags.
 **base\_path**
 :   The base path of the component.
 
-    In \$config: Specify the absolute path.
+*	In $config: Specify the absolute path.
 
-    In fof.xml: Specify a path relative to the site’s root.
+*	In fof.xml: Specify a path relative to the site’s root.
 
 **cacheableTasks**
 :   A comma separated list of tasks which support Joomla!’s caching.
@@ -34,15 +34,15 @@ file’s `<option>` tags inside the `<view>` tags.
 :   Should we be doing a token check for the tasks of this view? The
     possible values are:
 
-    -   0 - no token checks are performed
+-	0 - no token checks are performed
 
-    -   1 - token checks are always performed
+-   1 - token checks are always performed
 
-    -   2 - token checks are always performed in the back-end and in in
+-   2 - token checks are always performed in the back-end and in in
         the front-end, but only when the request format is 'html'
         (default setting)
 
-    -   3 - token checks are performer only in the back-end
+-   3 - token checks are performer only in the back-end
 
 **default\_task**
 :   The task to execute if none is defined. The default value is
@@ -77,9 +77,9 @@ file’s `<option>` tags inside the `<view>` tags.
     default it's the `helpers` directory inside your component's
     directory.
 
-    In \$config: Specify an absolute path.
+* In $config: Specify an absolute path.
 
-    In fof.xml: Specify a path relative to the component's directory.
+* In fof.xml: Specify a path relative to the component's directory.
 
 **id**
 :   Define an item ID to limit the view on. Normally this is empty. Only
@@ -100,9 +100,9 @@ file’s `<option>` tags inside the `<view>` tags.
 :   The path where the Controller will be looking for Model class files.
     By default it's the `models` directory of the component's directory.
 
-    In \$config: Specify an absolute path.
+* In $config: Specify an absolute path.
 
-    In fof.xml: Specify a path relative to the component's directory.
+* In fof.xml: Specify a path relative to the component's directory.
 
 **model\_prefix**
 :   The naming prefix for the Model to be loaded by the Controller. The
@@ -117,9 +117,9 @@ file’s `<option>` tags inside the `<view>` tags.
 :   The path where Controller classes will be searched for. By default
     it's the `controllers` directory inside your component's directory.
 
-    In \$config: Specify the absolute path.
+* In $config: Specify the absolute path.
 
-    In fof.xml: Specify a path relative to the component's root
+* In fof.xml: Specify a path relative to the component's root
     directory.
 
 **table\_path**
@@ -127,9 +127,9 @@ file’s `<option>` tags inside the `<view>` tags.
     default it's the `tables` directory inside your component's
     directory.
 
-    In \$config: Specify an absolute path.
+* In $config: Specify an absolute path.
 
-    In fof.xml: Specify a path relative to the component's directory.
+* In fof.xml: Specify a path relative to the component's directory.
 
 **table**
 :   Set the name of the table class the Model will use. Please note that
@@ -153,18 +153,18 @@ file’s `<option>` tags inside the `<view>` tags.
     form (.xml) files. By default it's the `tmpl` directory inside the
     current view's directory.
 
-    In \$config: Specify an absolute path.
+* In $config: Specify an absolute path.
 
-    In fof.xml: Specify a path relative to the component's directory.
+* In fof.xml: Specify a path relative to the component's directory.
 
 **view\_path**
 :   The path where the Controller will be looking for View class files.
     By default it's the `views` directory inside your component's
     directory.
 
-    In \$config: Specify an absolute path.
+* In $config: Specify an absolute path.
 
-    In fof.xml: Specify a path relative to the component's directory.
+* In fof.xml: Specify a path relative to the component's directory.
 
 **viewName**
 :   The name of the View class to load. Automatically defined based on

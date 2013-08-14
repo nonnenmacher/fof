@@ -2,14 +2,14 @@
 - [Introduction](chapters/introduction.md)
 - [Getting Started](chapters/packages/gettingstarted.md)
 - [Key Features](chapters/packages/keyfeatures.md)
-- [Component Overview](chapters/packages/componentoverview.md)
+- [Component Overview and Reference](chapters/packages/componentoverview.md)
 	- [Models](chapters/packages/componentoverview.models.md)
 	- [Tables](chapters/packages/componentoverview.tables.md)
 	- [Controllers](chapters/packages/componentoverview.controllers.md)
 	- [Views](chapters/packages/componentoverview.views.md)
 	- [Dispatcher](chapters/packages/componentoverview.dispatcher.md)
 	- [Toolbar](chapters/packages/componentoverview.toolbar.md)
-	- [HMVC](chapters/packages/componentoverview.hmvc.md)
+	- [HMVC](chapters/packages/componentoverview.HMVC.md)
 
 - Features Reference
 - [Configuring MVC](chapters/config/overview.md)
@@ -20,15 +20,6 @@
 	- [Form types](chapters/xmlforms/formtypes.md)
 	- [Header field types reference](chapters/xmlforms/header.md)
 	- [Form field types reference](chapters/xmlforms/form.md)
-
-- Base Classes Reference
-- [Preface](classes/introduction.md)
-- [FOF Dispatcher](classes/packages/fofdispatcher.md)
-- [FOF Controller](classes/packages/fofcontroller.md)
-- [FOF Model](classes/packages/fofmodel.md)
-- [FOF View](classes/packages/fofview.md)
-- [FOF Table](classes/packages/foftable.md)
-- [FOF Toolbar](classes/packages/foftoolbar.md)
 
 - Appendices
 - [Definitions](appendices/definitions.md)
